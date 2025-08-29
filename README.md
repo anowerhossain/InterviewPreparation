@@ -61,6 +61,29 @@ FROM jan
 JOIN feb USING (user_id);
 ```
 
+### Q5. Customers Who Made Transactions Every Month. (Find users who made at least 1 transaction in every month of 2024.)
+
+```sql
+SELECT user_id
+FROM (
+    SELECT user_id, COUNT(DISTINCT DATE_TRUNC('month', txn_date)) AS active_months
+    FROM transactions
+    WHERE DATE_PART('year', txn_date) = 2024
+    GROUP BY user_id
+) t
+WHERE active_months = 12;
+```
+
+### Q6. Write a query to calculate the running total of amount per user ordered by date.
+
+```sql
+SELECT 
+    user_id,
+    txn_date,
+    amount,
+    SUM(amount) OVER (PARTITION BY user_id ORDER BY txn_date) AS running_total
+FROM transactions;
+```
 
 
 # Section B: Statistics & Probability
