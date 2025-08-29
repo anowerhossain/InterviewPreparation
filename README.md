@@ -79,36 +79,56 @@ Correlation does not imply causation.
 ### Q1. Write a Python script to calculate daily active users (DAU) from a logins.csv file with columns (user_id, login_time).
 
 ```python
-import pandas as pd
+import pandas as pd  # Import pandas for data manipulation
 
+# Read CSV file, parse 'login_time' as datetime column
 df = pd.read_csv("logins.csv", parse_dates=["login_time"])
+
+# Extract only the date (without time) from login_time
 df["date"] = df["login_time"].dt.date
 
+# Group by each date and count unique user_ids to get DAU
 dau = df.groupby("date")["user_id"].nunique().reset_index(name="DAU")
+
+# Print the resulting Daily Active Users
 print(dau)
+
 ```
 
 ### Q2. Given a Pandas DataFrame df with user_id and signup_date, write code to calculate the number of new users per week.
 
 ```python
+# Convert signup_date column to datetime
 df["signup_date"] = pd.to_datetime(df["signup_date"])
+
+# Convert signup_date into week period, then get the start of each week
 df["week"] = df["signup_date"].dt.to_period("W").apply(lambda r: r.start_time)
 
+# Group by week and count unique user_id values = number of new users per week
 weekly_new_users = df.groupby("week")["user_id"].nunique().reset_index(name="new_users")
+
+# Print the resulting weekly new users DataFrame
 print(weekly_new_users)
+
 ```
 
 
 ### Q3. Write a Python function to calculate churn rate given two sets: users at the beginning of the month and users at the end.
 
 ```python
+# Function to calculate churn rate
 def churn_rate(start_users, end_users):
+    # Users who were in start but not in end = lost users
     lost_users = len(start_users - end_users)
+    
+    # Churn rate = lost users divided by total starting users
     return lost_users / len(start_users)
 
-start = {"u1","u2","u3","u4","u5"}
-end = {"u2","u3","u5"}
+# Example sets of users at start and end of month
+start = {"u1","u2","u3","u4","u5"}   # users at beginning
+end = {"u2","u3","u5"}               # users at end
 
+# Print the churn rate result
 print("Churn Rate:", churn_rate(start, end))
 ```
 
