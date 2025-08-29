@@ -47,6 +47,21 @@ LEFT JOIN july_active j ON u.user_id = j.user_id;
 ```
 
 
+### Q4. SQL to calculate retention: users who made transactions in January AND February.
+
+```sql
+WITH jan AS (
+  SELECT DISTINCT user_id FROM transactions WHERE DATE_TRUNC('month', date) = '2025-01-01'
+),
+feb AS (
+  SELECT DISTINCT user_id FROM transactions WHERE DATE_TRUNC('month', date) = '2025-02-01'
+)
+SELECT COUNT(*) AS retained_users
+FROM jan
+JOIN feb USING (user_id);
+```
+
+
 
 # Section B: Statistics & Probability
 
@@ -95,6 +110,7 @@ print(dau)
 
 ```
 
+
 ### Q2. Given a Pandas DataFrame df with user_id and signup_date, write code to calculate the number of new users per week.
 
 ```python
@@ -132,6 +148,50 @@ end = {"u2","u3","u5"}               # users at end
 print("Churn Rate:", churn_rate(start, end))
 ```
 
+### Q4. Python function to detect fraudulent transactions where amount > 3x user’s average.
+
+```python
+
+# Calculate avg transaction per user
+user_avg = df.groupby("user_id")["amount"].mean().to_dict()
+
+# Flag fraud if transaction > 3x avg
+df["is_fraud"] = df.apply(lambda x: x["amount"] > 3 * user_avg[x["user_id"]], axis=1)
+
+print(df[df["is_fraud"]])
+
+```
+
+### Q5. Calculate Monthly Active Users (MAU) given a logins dataset (user_id, login_time).
+
+```python
+df = pd.read_csv("logins.csv", parse_dates=["login_time"])
+
+# Extract year-month
+df["month"] = df["login_time"].dt.to_period("M")
+
+# Count unique active users per month
+mau = df.groupby("month")["user_id"].nunique().reset_index(name="MAU")
+
+print(mau)
+
+```
+
+
+### Q6. Write a Python query to calculate the average transaction amount per user from a transactions.csv file with columns (user_id, amount, date).
+
+```pythpn
+
+# Load CSV
+df = pd.read_csv("transactions.csv")
+
+# Group by user_id and take average transaction amount
+avg_txn = df.groupby("user_id")["amount"].mean().reset_index(name="avg_transaction")
+
+print(avg_txn.head())
+
+```
+
 # Section D: Data Interpretation
 
 ### Q1. You are given a chart showing average response time (ART) per agent. Some agents have much higher ART than others. What could be possible reasons?
@@ -150,7 +210,7 @@ Set clear SLA expectations with automated responses.
 
 # Section E: Case Study
 
-### Q3. Q12. Your company wants to analyze churn. You are given tables users(user_id, signup_date, country) and transactions(transaction_id, user_id, transaction_date). How would you approach churn analysis?
+### Q1. Your company wants to analyze churn. You are given tables users(user_id, signup_date, country) and transactions(transaction_id, user_id, transaction_date). How would you approach churn analysis?
 
 - Define churn: e.g., user inactive for 30/60 days.
 - Build active user cohorts (monthly).
