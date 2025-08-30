@@ -352,3 +352,79 @@ def count_frequency(lst):
 # Test
 print(count_frequency([1, 2, 2, 3, 3, 3]))  # Output: {1: 1, 2: 2, 3: 3}
 ```
+
+### Q9. What is a KeyError?
+- A KeyError occurs in Python when you try to access a dictionary key that does not exist.
+```python
+student_scores = {"Alice": 85, "Bob": 92}
+
+# Accessing a non-existing key
+print(student_scores["Charlie"])  # KeyError: 'Charlie'
+
+# The .get() method safely returns None (or a default value you provide) if the key doesn’t exist.
+
+score = student_scores.get("Charlie")  # Returns None instead of error
+print(score)  # Output: None
+
+# You can provide a default value
+score = student_scores.get("Charlie", 0)
+print(score)  # Output: 0
+
+```
+
+### Q10. Shallow Copy vs Deep Copy in Python
+
+- Shallow Copy Changes to mutable objects inside the copy will affect the original.
+
+```python
+import copy
+
+original = [[1, 2], [3, 4]]
+
+# Shallow copy
+shallow = copy.copy(original)
+
+shallow[0][0] = 99  # Modify inner list
+print(original)  # Output: [[99, 2], [3, 4]]
+print(shallow)   # Output: [[99, 2], [3, 4]]
+```
+
+- Deep copy creates a completely independent copy do not affect the original.
+
+```python
+import copy
+
+original = [[1, 2], [3, 4]]
+
+# Deep copy
+deep = copy.deepcopy(original)
+
+deep[0][0] = 99  # Modify inner list
+print(original)  # Output: [[1, 2], [3, 4]]
+print(deep)      # Output: [[99, 2], [3, 4]]
+```
+
+
+### Q11. What are decorators in Python? 
+
+- Decorators in Python are a design pattern that allows you to add new functionality to an existing object without modifying its structure. They are commonly used to extend the behavior of functions or methods.
+
+```python
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+# Output:
+# Something is happening before the function is called.
+# Hello!
+# Something is happening after the function is called.
+```
+
