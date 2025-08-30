@@ -261,7 +261,7 @@ print(reverse_string("Python"))  # Output: "nohtyP"
 
 ### Q2. Determine if a string reads the same backward. (Palindome word)
 
-```pythpn
+```python
 def is_palindrome(s):
     s = s.lower().replace(" ", "")  # Normalize string
     return s == s[::-1]
