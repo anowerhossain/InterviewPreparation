@@ -242,3 +242,113 @@ Set clear SLA expectations with automated responses.
 - Calculate churn rate per cohort, country, signup month.
 - Use visualization (cohort retention charts).
 - Recommend interventions (e.g., reactivation campaigns).
+
+
+
+# Section F: Python for programming 
+
+### Q1. Problem: Reverse a given string without using built-in reverse().
+
+```python
+def reverse_string(s):
+    # Using slicing to reverse the string
+    return s[::-1]
+
+# Test
+print(reverse_string("Python"))  # Output: "nohtyP"
+```
+- s[::-1] slices the string starting from the end to the beginning, effectively reversing it.
+
+### Q2. Determine if a string reads the same backward. (Palindome word)
+
+```pythpn
+def is_palindrome(s):
+    s = s.lower().replace(" ", "")  # Normalize string
+    return s == s[::-1]
+
+# Test
+print(is_palindrome("Race car"))  # Output: True
+```
+
+### Q3. Find the Largest Element in a List
+
+```python
+def largest_element(arr):
+    max_val = arr[0]  # Assume first element is largest
+    for num in arr:
+        if num > max_val:
+            max_val = num
+    return max_val
+
+# Test
+print(largest_element([3, 5, 7, 2, 8]))  # Output: 8
+```
+
+### Q4. Fibonacci Sequence (Iterative)
+
+```python
+def fibonacci(n):
+    if n <= 0:
+        return []
+    fib_seq = [0, 1]
+    while len(fib_seq) < n:
+        fib_seq.append(fib_seq[-1] + fib_seq[-2])
+    return fib_seq[:n]
+
+# Test
+print(fibonacci(7))  # Output: [0, 1, 1, 2, 3, 5, 8]
+```
+
+- Start with [0, 1].
+- Append the sum of the last two elements until reaching n terms.
+
+
+### Q5. Remove Duplicates from a List
+
+```python
+def remove_duplicates(lst):
+    return list(set(lst))  # Convert to set and back
+
+# Test
+print(remove_duplicates([1, 2, 2, 3, 4, 4]))  # Output: [1, 2, 3, 4]
+```
+
+###  Q6. Find the Missing Number in an Array
+
+```python
+def find_missing(arr):
+    n = len(arr) + 1
+    total_sum = n * (n + 1) // 2
+    return total_sum - sum(arr)
+
+# Test
+print(find_missing([1, 2, 4, 5, 6]))  # Output: 3
+```
+
+- Use formula for sum of 1 to n: n*(n+1)/2.
+- Subtract the actual sum to find missing number.
+
+### Q7.Check if Two Strings are Anagrams.
+
+```python
+def are_anagrams(s1, s2):
+    return sorted(s1.replace(" ", "").lower()) == sorted(s2.replace(" ", "").lower())
+
+# Test
+print(are_anagrams("listen", "silent"))  # Output: True
+```
+
+- Sort both strings and compare.
+- Ignoring spaces and case ensures proper comparison.
+
+### Q8. Count Frequency of Elements in a List
+
+```python
+from collections import Counter
+
+def count_frequency(lst):
+    return dict(Counter(lst))
+
+# Test
+print(count_frequency([1, 2, 2, 3, 3, 3]))  # Output: {1: 1, 2: 2, 3: 3}
+```
