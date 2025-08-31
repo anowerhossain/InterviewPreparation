@@ -99,6 +99,45 @@ FROM transactions;
    - Include the asset that first **crosses the 80% threshold**.  
 5. **Order the final output** by `user_id` and descending `asset_value`.
 
+```sql
+WITH asset_running AS (
+    SELECT 
+        ur.user_id,
+        ur.name,
+        ss.asset_name,
+        ss.asset_value,
+        SUM(ss.asset_value) OVER (PARTITION BY ur.user_id) AS total_value,
+        SUM(ss.asset_value) OVER (
+            PARTITION BY ur.user_id
+            ORDER BY ss.asset_value DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS running_total,
+        (SUM(ss.asset_value) OVER (
+            PARTITION BY ur.user_id
+            ORDER BY ss.asset_value DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) * 100.0 
+         / SUM(ss.asset_value) OVER (PARTITION BY ur.user_id)) AS running_pct,
+        ROW_NUMBER() OVER (
+            PARTITION BY ur.user_id 
+            ORDER BY ss.asset_value DESC
+        ) AS rn
+    FROM test.asset AS ss
+    INNER JOIN test.users AS ur ON ss.user_id = ur.user_id
+),
+cutoff AS (
+    SELECT user_id, MIN(rn) AS cutoff_rn
+    FROM asset_running
+    WHERE running_pct >= 80
+    GROUP BY user_id
+)
+SELECT ar.*
+FROM asset_running ar
+JOIN cutoff c ON ar.user_id = c.user_id
+WHERE ar.rn <= c.cutoff_rn  
+ORDER BY ar.user_id, ar.running_total;
+```
+
 
 
 
