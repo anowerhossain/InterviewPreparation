@@ -85,6 +85,22 @@ SELECT
 FROM transactions;
 ```
 
+### Q7. User Assets & Pareto Analysis
+
+-- users ( user_id, name ) || asset ( asset_id, user_id, asset_name, asset_value )
+
+1. **Calculate the total asset value per user.**  
+2. **List each user’s assets in descending order of `asset_value`.**  
+3. **For each asset, calculate:**
+   - Running total of asset values per user.
+   - Running percentage of total assets per user.  
+4. **Filter the results:**
+   - For each user, include **only the assets that cumulatively account for ~80% of the user’s total asset value**.  
+   - Include the asset that first **crosses the 80% threshold**.  
+5. **Order the final output** by `user_id` and descending `asset_value`.
+
+
+
 
 # Section B: Statistics & Probability
 
@@ -427,4 +443,6 @@ say_hello()
 # Hello!
 # Something is happening after the function is called.
 ```
+
+
 
