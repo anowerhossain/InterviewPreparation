@@ -157,6 +157,56 @@ Together, this frame specification tells SQL:
 
 > For each row, include **all rows from the start of the partition up to the current row** when calculating the window function.
 
+### Q8. Find drivers whose **fuel efficiency** has improved by comparing their average fuel efficiency in the **first half of the year** with the **second half of the year**.
+
+- drivers(driver_id,driver_name) |  trips(trip_id,driver_id,trip_date,distance_km,fuel_consumed)
+- Calculate fuel efficiency as distance_km / fuel_consumed for each trip
+- First half: January to June, Second half: July to December
+- Only include drivers who have trips in both halves of the year
+- Calculate the efficiency improvement as (second_half_avg - first_half_avg)
+- Round all results to 2 decimal places
+
+```sql
+WITH fuel_efficiency AS (
+    SELECT *, distance_km / fuel_consumed AS df
+    FROM trips
+), 
+first_half AS (
+    SELECT 
+        driver_id, 
+        AVG(df) AS first_half_avg_raw, 
+        ROUND(AVG(df), 2) AS first_half_avg
+    FROM fuel_efficiency
+    WHERE trip_date >= '2023-01-01'
+      AND trip_date < '2023-07-01'
+    GROUP BY 1
+), 
+second_half AS (
+    SELECT 
+        driver_id, 
+        AVG(df) AS second_half_avg_raw, 
+        ROUND(AVG(df), 2) AS second_half_avg
+    FROM fuel_efficiency
+    WHERE trip_date >= '2023-07-01'
+      AND trip_date < '2024-01-01'
+    GROUP BY 1
+)
+SELECT 
+    fh.driver_id,
+    ds.driver_name,
+    fh.first_half_avg,
+    sh.second_half_avg,
+    ROUND(sh.second_half_avg_raw - fh.first_half_avg_raw, 2) AS efficiency_improvement
+FROM first_half AS fh
+INNER JOIN second_half AS sh 
+    ON fh.driver_id = sh.driver_id
+INNER JOIN drivers AS ds 
+    ON fh.driver_id = ds.driver_id
+WHERE ROUND(sh.second_half_avg_raw - fh.first_half_avg_raw, 2) > 0
+ORDER BY 
+    ROUND(sh.second_half_avg_raw - fh.first_half_avg_raw, 2) DESC,
+    ds.driver_name ASC;
+```
 
 
 # Section B: Statistics & Probability
