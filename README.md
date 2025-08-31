@@ -144,7 +144,7 @@ ORDER BY ar.user_id, ar.running_total;
 ```
 
 
-# Understanding `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` in SQL
+### Understanding `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` in SQL
 
 `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` is a **frame specification** used in window functions like `SUM()`, `AVG()`, etc.
 
