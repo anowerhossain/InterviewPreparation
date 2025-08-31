@@ -118,6 +118,11 @@ WITH asset_running AS (
             ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
         ) * 100.0 
          / SUM(ss.asset_value) OVER (PARTITION BY ur.user_id)) AS running_pct,
+         ARRAY_AGG(ss.asset_name) OVER (
+            PARTITION BY ur.user_id
+            ORDER BY ss.asset_value DESC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS running_asset,
         ROW_NUMBER() OVER (
             PARTITION BY ur.user_id 
             ORDER BY ss.asset_value DESC
