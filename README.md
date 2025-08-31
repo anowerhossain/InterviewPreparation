@@ -144,6 +144,19 @@ ORDER BY ar.user_id, ar.running_total;
 ```
 
 
+# Understanding `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` in SQL
+
+`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` is a **frame specification** used in window functions like `SUM()`, `AVG()`, etc.
+
+- **`UNBOUNDED PRECEDING`** → start from the very first row of the partition.  
+- **`CURRENT ROW`** → stop at the current row.
+
+### Meaning
+
+Together, this frame specification tells SQL:
+
+> For each row, include **all rows from the start of the partition up to the current row** when calculating the window function.
+
 
 
 # Section B: Statistics & Probability
