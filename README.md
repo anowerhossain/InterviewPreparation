@@ -394,7 +394,7 @@ Set clear SLA expectations with automated responses.
 - Closed/deleted account.
 - Balance withdrawn and never reloaded.
 
-### What is Cohort analysis
+### Q5. What is Cohort analysis
 *Retention Over Time*
 
 If you only look at overall active users, it hides patterns. Cohort analysis groups users by their signup or first-transaction date and tracks how long they stay active.
@@ -420,6 +420,34 @@ Cohorts don’t have to be only by signup date — they can also be:
 - By geography (urban vs rural users).
 - By transaction type (bill pay first vs P2P transfer first).
 
+### Q6. What RFM Stands and Why It’s Useful in a Payment App
+- *R = Recency* → How recently a customer made a transaction.
+- *F = Frequency* → How often the customer makes transactions.
+- *M = Monetary* → How much money the customer spends (transaction value).
+
+How It Works
+Assign scores for each customer- Example (scale 1–5, where 5 = best):
+- Recency → Customers who transacted last week get 5, last month get 3, last 6 months get 1.
+- Frequency → Customers making 50+ payments/month get 5, 10–20 get 3, <5 get 1.
+- Monetary → Customers spending $10,000+/month get 5, $1,000 get 3, <$100 get 1.
+
+*Combine the scores into an RFM score (e.g., R=5, F=4, M=5).*
+
+*Segment users based on RFM scores*
+- Champions (555) → Active, frequent, high spenders.
+- Loyal Customers (x5x) → Frequent, even if not high spenders.
+- Big Spenders (xx5) → High-value but maybe less frequent.
+- At Risk (1xx) → Haven’t transacted recently, could churn.
+- Dormant (111) → Low recency, frequency, and spend → almost lost.
+
+*Why It’s Useful in a Payment App*
+- Identify High-Value Customers (HVCs) → Champions and big spenders.
+- Detect Churn Early → Customers with dropping recency/frequency scores.
+Targeted Marketing →
+- Cashback campaigns for at-risk customers.
+- Premium offers for high spenders.
+- Referral rewards for loyal customers.
+- Prioritize Support → Give faster support to high RFM score users.
 
 # Section F: Python for programming 
 
