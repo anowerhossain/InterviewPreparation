@@ -366,6 +366,15 @@ Set clear SLA expectations with automated responses.
 - Use visualization (cohort retention charts).
 - Recommend interventions (e.g., reactivation campaigns).
 
+### Q2. How can you define HVC in your application.
+- Total Transaction Value.
+- Total Transaction Volume.
+- Consistency.
+- Diversity of transaction ( P2P, Pay Bill ( Shopping, Subscriptions), Bank Cashin, Card cashin ).
+- Fee Generator in terms of revenue generation.
+- High Balance Holder.
+- Premium Feature Users.
+- Early Adopter of New Feature.
 
 
 # Section F: Python for programming 
