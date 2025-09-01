@@ -376,6 +376,50 @@ Set clear SLA expectations with automated responses.
 - Premium Feature Users.
 - Early Adopter of New Feature.
 
+### Q3. Factors Causing Churn
+- Complex onboarding or KYC → too many steps or document rejections.
+- App reliability → downtime, failed transactions, or technical glitches.
+- Poor user experience → slow interface, confusing navigation.
+- Low rewards or incentives (competitors offering cashback, discounts).
+- Delayed refunds or failed dispute handling.
+- Slow response times to issues.
+- Lack of proactive support when transactions fail.
+- Better competitor offers (cashbacks, lower fees, more merchants supported).
+- One-time use (e.g., only for signup bonus, then abandoned).
+- Not integrated into lifestyle (no recurring bill payments, travel, P2P).
+
+### Q4. Definition of churn users of a system.
+- No transaction for X days/weeks (e.g., 60 or 90 days).
+- No logins/engagement within a certain period.
+- Closed/deleted account.
+- Balance withdrawn and never reloaded.
+
+### What is Cohort analysis
+*Retention Over Time*
+
+If you only look at overall active users, it hides patterns. Cohort analysis groups users by their signup or first-transaction date and tracks how long they stay active.
+Example:
+- Users who joined in January → 60% still active after 3 months.
+- Users who joined in June → only 30% active after 3 months.
+This shows whether retention is improving or declining with new signups.
+
+*Spot Early Churn Patterns*
+
+- Payment apps often lose users right after the first transaction or bonus offer.
+- Cohorts help identify when churn happens (Week 1, Month 1, Month 3).
+- This tells you if the problem is onboarding, habit building, or long-term loyalty.
+
+*Measure Impact of Product Changes*
+- You can compare cohorts before and after new features (e.g., cashback, QR pay, bill payments).
+- If retention improves in later cohorts, you know the feature helped.
+- If not, you know changes didn’t address churn.
+
+*Compare Customer Segments*
+Cohorts don’t have to be only by signup date — they can also be:
+- By acquisition channel (ads, referral, organic).
+- By geography (urban vs rural users).
+- By transaction type (bill pay first vs P2P transfer first).
+
 
 # Section F: Python for programming 
 
