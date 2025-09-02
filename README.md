@@ -449,6 +449,35 @@ Targeted Marketing →
 - Referral rewards for loyal customers.
 - Prioritize Support → Give faster support to high RFM score users.
 
+
+### Q7. If payment success rate drops suddenly, how would you investigate?
+
+*Confirm the Drop*
+- Compare against historical baseline (hourly/daily success rate).
+- Check if the drop is global or specific (bank, merchant, region, channel).
+
+*Segment the Problem*
+- By payment channel: card, mobile banking, wallet balance.
+- By partner bank/gateway: maybe one partner is failing.
+- By customer journey step: login → OTP → payment → confirmation.
+- Create monitoring alerts for sudden success rate drops.
+
+*User-related (insufficient balance, wrong PIN)*
+
+### Q8. How would you detect fraudulent transactions in Pathao Pay?
+
+Fraud in payments can be:
+- Multiple failed login/payment attempts
+- Abnormally high transaction volume in short time
+- Transactions from unusual devices/IP locations
+- Using stolen cards/accounts
+- Bypassing KYC/AML limits
+
+Detection Approaches
+- Rule-based checks: e.g., flag if > 5 failed OTP attempts in 10 min.
+- Statistical anomaly detection: Compare with user’s historical behavior.
+
+
 # Section F: Python for programming 
 
 ### Q1. Problem: Reverse a given string without using built-in reverse().
